@@ -8,4 +8,4 @@ if (!localStorage.getItem('uid')) {
 const uid = localStorage.getItem('uid');
 console.log('uid > ', uid)
 // khởi tạo cart với null 
-const cart = null;
+

@@ -14,6 +14,7 @@ const renderCarts = () => {
     method: "GET",
   }).then(function (res) {
     renderCart(res.data)
+    cart = 1
   }).catch(function (err) {
     console.log('lỗi > ', err)
   })

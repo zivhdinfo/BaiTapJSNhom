@@ -23,21 +23,31 @@ const renderProductList = (productarr) => {
 
 const renderCart = (cartArr) => {
     var listCart = ``;
+    var found = false; // Sử dụng biến này để kiểm tra xem có món hàng nào trong giỏ hàng không
+
     for (var index = 0; index < cartArr.length; index++) {
-      const cart = cartArr[index];
-      if (localStorage.getItem('uid') == cart.uid) {
-        const table = `
-            <tr>
-                <td>${cart.name}</td>
-                <td><input type="number" id="cart${cart.id}" value="${cart.quantity}"></td>
-                <td>${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cart.price)} </td>
-                <td>${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cart.price * cart.quantity)} </td>
-                <td><button class="btn btn-primary" onclick="updateCart(${cart.id})">Cập Nhật</button></td>
-            </tr>
-        `;
-        listCart += table;
-      }
+        const cart = cartArr[index];
+        if (localStorage.getItem('uid') == cart.uid) {
+            found = true; // Đánh dấu là đã tìm thấy món hàng cho `uid` hiện tại
+            const table = `
+                <tr>
+                    <td>${cart.name}</td>
+                    <td><input type="number" id="cart${cart.id}" value="${cart.quantity}"></td>
+                    <td>${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cart.price)} </td>
+                    <td>${new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(cart.price * cart.quantity)} </td>
+                    <td><button class="btn btn-primary" onclick="updateCart(${cart.id})">Cập Nhật</button></td>
+                </tr>
+            `;
+            listCart += table;
+        }
     }
+
+    // Kiểm tra xem có món hàng nào trong giỏ hàng không, nếu không thì in thông báo
+    if (!found) {
+        listCart = '<tr><td colspan="5">Bạn không có món hàng nào trong giỏ hàng</td></tr>';
+    }
+
     document.getElementById("listCart").innerHTML = listCart;
-  };
+};
+
   
