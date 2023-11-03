@@ -3,8 +3,8 @@ const renderProductList = (productarr) => {
     for (var index = 0; index < productarr.length; index++) {
 
         const Card = `
-        <div class="col-md-4 pt-2 ">
-        <div class="card">
+        <div class="col-lg-4 col-sm-6 col-xl-3 pt-2 col-12 ">
+        <div class="card zivhd-card ">
             <img src="${productarr[index].img}" class="card-img-top" alt="${productarr[index].name}" />
             <div class="card-body">
                 <h5 class="card-title">${productarr[index].name}</h5>
