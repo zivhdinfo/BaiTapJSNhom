@@ -40,6 +40,20 @@ const updateCart = (id) => {
         Swal.fire(
           `Thành Công Cập Nhật Số Lượng Lên Thành ${response.data.quantity}`
         );
+        // nếu nhỏ hơn 0 thì xóa luôn
+        if (response.data.quantity <= 0) {
+          axios({
+            method: "DELETE",
+            url: `https://6537454fbb226bb85dd303d6.mockapi.io/cart/${id}`,
+          })
+            .then(function (res) {
+              Swal.fire(`Cập thật thành công`);
+              renderCarts();
+            })
+            .catch(function (err) {
+              Swal.fire(err);
+            });
+        }
         renderCarts();
       })
       .catch(function (error) {
@@ -66,7 +80,6 @@ const addCart = (product, price, name) => {
     uid: uid, // uid tạo ở core
     name: name,
   };
-
   // check giỏ hàng
   getApi("https://6537454fbb226bb85dd303d6.mockapi.io/cart")
     .then((getApiCart) => {
@@ -122,12 +135,50 @@ const addCart = (product, price, name) => {
               Swal.fire(`Thêm thành công ${response.data.name} vào giỏ hàng`);
             })
             .catch(function (error) {
-              Swal.fire("Lỗi khi thêm sản phẩm vào giỏ hàng: ", error);
+              Swal.fire("Lỗi khi thêm sản phẩm vào giỏ hàng: ", error.code);
             });
         }
       }
     })
     .catch((err) => {
-      console.log("err > ", err);
+      console.log("Lỗi Giỏ Hàng  ", err);
     });
 };
+
+function deleteAll() {
+  let dataID = [];
+
+  axios({
+    method: "GET",
+    url: "https://6537454fbb226bb85dd303d6.mockapi.io/cart",
+  })
+    .then(function (res) {
+      let listRes = res.data;
+
+      for (let i = 0; i < listRes.length; i++) {
+        if (listRes[i].uid == uid) {
+          dataID.push(listRes[i].id);
+        }
+      }
+
+      // Tạo mảng chứa các yêu cầu xóa
+      let deletePromises = dataID.map((id) => {
+        return axios({
+          method: "delete",
+          url: `https://6537454fbb226bb85dd303d6.mockapi.io/cart/${id}`,
+        });
+      });
+
+      Promise.all(deletePromises)
+        .then(function () {
+          Swal.fire("Xóa Giỏ Hàng Thành Công");
+          renderCarts();
+        })
+        .catch(function (err) {
+          console.log(err);
+        });
+    })
+    .catch(function (err) {
+      console.log(err);
+    });
+}
