@@ -154,6 +154,11 @@ function deleteAll() {
   })
     .then(function (res) {
       let listRes = res.data;
+      // Kiểm tra nếu giỏ hàng trống
+      if (listRes.length === 0) {
+        Swal.fire("Giỏ hàng của bạn đang trống");
+        return; // Dừng việc xóa và hiển thị thông báo
+      }
 
       for (let i = 0; i < listRes.length; i++) {
         if (listRes[i].uid == uid) {
@@ -171,7 +176,7 @@ function deleteAll() {
 
       Promise.all(deletePromises)
         .then(function () {
-          Swal.fire("Xóa Giỏ Hàng Thành Công");
+          Swal.fire("Thanh Toán Thành Công");
           renderCarts();
         })
         .catch(function (err) {
@@ -182,3 +187,18 @@ function deleteAll() {
       console.log(err);
     });
 }
+
+getApi("https://6537454fbb226bb85dd303d6.mockapi.io/product")
+  .then(function (res) {
+    let data = res.data;
+    let selectElement = document.getElementById("mySelect");
+    for (let i = 0; i < data.length; i++) {
+      let dataList = document.createElement("option");
+      dataList.value = data[i].type; // Loại sản phẩm được gán vào value của option
+      dataList.textContent = data[i].name;
+      selectElement.appendChild(dataList);
+    }
+  })
+  .catch(function (err) {
+    console.log(err);
+  });

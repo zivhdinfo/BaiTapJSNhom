@@ -13,7 +13,7 @@
     <!-- Header -->
     <header class="bg-dark text-white p-4">
       <div class="container">
-        <h1 class="display-4">Giỏ Hàng</h1>
+        <h1 id="customer" class="display-4">Giỏ Hàng Của Người Dùng</h1>
       </div>
     </header>
 
@@ -47,7 +47,7 @@
             class="btn w-100 bg-info rounded-1 p-2 text-center text-bg-secondary"
             onclick="deleteAll()"
           >
-            Xóa Giỏ Hàng
+            Thanh Toán
           </div>
         </div>
       </div>
@@ -64,5 +64,10 @@
     <script src="./js/core.js"></script>
     <script src="./js/controller.js"></script>
     <script src="./js/model.js"></script>
+    <script>
+      document.getElementById(
+        "customer"
+      ).innerText = `Giỏ Hàng Của Người Dùng ${uid}`;
+    </script>
   </body>
 </html>
