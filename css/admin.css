@@ -1,0 +1,104 @@
+/* Tùy chỉnh các phần tử của trang */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.content-wrapper {
+    flex: 1;
+}
+
+/* Tùy chỉnh sidebar */
+.main-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 1030;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.brand-link {
+    padding: 15px;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    color: #fff;
+    background-color: #343a40;
+}
+
+.sidebar {
+    padding-top: 60px;
+}
+
+.nav-pills .nav-link {
+    color: #fff;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    background-color: #343a40;
+}
+
+/* Tùy chỉnh content */
+.content-header {
+    background-color: #f8f9fa;
+    padding: 20px 0;
+    margin-bottom: 20px;
+}
+
+.content-header h1 {
+    font-size: 24px;
+    margin: 0;
+    padding: 0;
+}
+
+.container-fluid {
+    padding: 0 15px;
+}
+
+.table {
+    width: 100%;
+    margin-bottom: 1rem;
+    color: #212529;
+    background-color: transparent;
+}
+
+.table th, .table td {
+    padding: .75rem;
+    vertical-align: top;
+    border-top: 1px solid #dee2e6;
+}
+
+/* Tùy chỉnh các nút */
+.btn {
+    cursor: pointer;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+}
+
+/* Responsive */
+@media (max-width: 767px) {
+    .main-sidebar {
+        display: none;
+    }
+    .wrapper {
+        padding-top: 56px;
+    }
+}
